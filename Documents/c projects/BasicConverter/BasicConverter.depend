@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1653823706 source:c:\users\asus\documents\c projects\basicconverter\main.c
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1673443779 source:c:\users\asus\documents\c projects\learning\main.c
+	<stdio.h>
+	<stdlib.h>
+
