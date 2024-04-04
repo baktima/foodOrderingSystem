@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1696664816 source:c:\users\asus\documents\c projects\testing\main.c
-	<stdio.h>
-	<stdlib.h>
-
-1696665225 source:c:\users\asus\documents\c projects\testing\internalpointer.c
-	<stdio.h>
-	<stdlib.h>
-
