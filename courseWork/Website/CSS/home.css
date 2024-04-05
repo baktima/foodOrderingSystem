@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, sans-serif;
+	box-sizing:border-box;
+}
+
+header{
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index:+1;
+}
+
+
+.navtop {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navtop_img {
+    width: 75px;
+    height: 75px; 
+    cursor: pointer;
+}
+
+.logcart {
+    display: flex;
+    align-items: center;
+}
+
+.logcart label {
+    padding: 10px;
+}
+
+.logcart label a{
+	text-decoration:none;
+    color: black;
+    text-transform: uppercase;
+}
+
+.logcart label a:hover{
+    color: red;
+}
+
+.navbar {
+    width: 50%;
+    margin: auto;
+    display: flex;
+	align-items: center;
+    justify-content: center;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+	transition:0.2s;
+}
+
+.navbar ul li a:hover {
+    color: red;
+	padding: 0 10px;
+}
+
+.line {
+    padding:30px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+	
+.bottom{
+	width: 90%;
+	padding:0 0 20px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+	justify-content:space-between;
+
+
+	
+}
+
+.bottom ul li{
+	list-style: none;
+}
+
+.bottom ul li a{
+	text-decoration: none;
+    color: black;
+	font-size:14px;
+}
+
+.foot-right{
+	text-align:right;
+}
+
+.sosmed{
+    margin: auto;
+    display: flex;
+	justify-content:center;
+}
+.social_logo{
+	width:85px;
+	height:85px;	
+	transition:0.2s;
+}
+
+.social_logo:hover{
+	cursor: pointer;
+	transform:scale(0.8);
+}
+
+footer{
+	position:sticky;
+}
