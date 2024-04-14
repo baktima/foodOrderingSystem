@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     //if there data inside the array errors, it will return true 
     if($errors){ 
         $_SESSION["error_login"] = $errors; 
-        header("Location: ../index.php");
+        header("Location: ../Website/Log_in.php");
         die();
     }
     //security
@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $_SESSION["last_regeneration"] = time();
 
-    HEADER("Location: ../index.php?login=success");
+    HEADER("Location: ../Website/home.php");
 
     $pdo = null; 
     $stmt = null; 
@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 }
 
 else{
-    header("Location: ../index.php"); 
+    header("Location: ../Website/Log_in.php"); 
     die(); 
 
 }
