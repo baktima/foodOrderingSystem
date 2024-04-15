@@ -77,9 +77,10 @@ if(isset($_SESSION['user_email'])) {
 	</div>
 </div>
 <aside class="">
-	<div class="cartTab">
+<div class="cartTab">
 		<h1>Shopping Cart</h1>
 		<div class="listcart">
+		<!-- start copy -->
 			<div class="cartItem">	
 				<div class="name">
 					NAME
@@ -93,10 +94,140 @@ if(isset($_SESSION['user_email'])) {
 					<button>></button>
 				</div>
 			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+		<!-- start copy -->
+			<div class="cartItem">	
+				<div class="name">
+					NAME
+				</div>
+				<div class="cartPrice">
+					$$$
+				</div>
+				<div class="cartQuantity">
+					<button><</button>
+					<span>0</span>
+					<button>></button>
+				</div>
+			</div>
+		<!-- End Copy -->
+			<div class="checkOut">
+					<h1>Location:</h1>
+				<div class="delLoc">
+					<button class="">Dine In</button>
+					<button class="">Delivery</button>
+				</div>
+				<h1>Payment Option:</h1>
+				<div class="payOpt">	
+					<form>
+					<select>
+						<option value="card">Card</option>
+					  <option value="grab">Grab</option>
+					  <option value="TNG">Touch 'n Go</option>
+					  <option value="Spay">Shopee Pay</option>
+					</select>
+					</form>
+				</div>
+				<h1>Total payment:</h1>
+				<div class="totalPay">
+					<h1>
+						$$$
+					</h1>
+				</div>
+			</div>	
 		</div>
 		<div class="cartbutton">
 			<button class="close">Close</button>
-			<button class="checkOut">Check out</button>
+			<button class="checkOut">Place Order</button>
 		</div>
 	</div>
 </aside>
