@@ -54,9 +54,9 @@ if(isset($_SESSION['user_email'])) {
 	<div class="Category">
 		<h2>Category</h2>
 		<ul>
-			<li><a href="menu.php"><b>All</b></a></li>
+			<li><a href="menu.php">All</a></li>
 			<li><a href="western.php">Western</a></li>
-			<li><a href="japanese.php">Japanese</a></li>
+			<li><a href="Japanese.php"><b>Japanese</b></a></li>
 			<li><a href="#">Chinese</a></li>
 			<li><a href="#">Arabic</a></li>
 			<li><a href="#">Beverages</a></li>
@@ -76,6 +76,7 @@ $foods = $statement->fetchAll(PDO::FETCH_ASSOC);
 // Loop through each food item and display it
 foreach($foods as $food) {
 
+	if($food["Type_id"] == "FT02") {
 	$imageData = base64_encode($food['image']);
 
     echo "
@@ -92,58 +93,8 @@ foreach($foods as $food) {
 		</div>  
     "; 
 }
+}
 ?>
-		<!-- <div class="card">
-			<img src="img/cheese burger.jpg">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button class="foodButtons" data-food-id="WS01">Add to Cart</button>
-				<span id="cartIdDisplay"></span>
-			</div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button>
-			</div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button> -->
-			<!-- </div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button>
-			</div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button>
-			</div>	
-		</div> -->
 	</div>
 </div>
 <footer>
