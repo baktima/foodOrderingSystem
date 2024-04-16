@@ -30,5 +30,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 }
 else{
+    //make this one index.php first
     header("Location: ../index.php");
 }

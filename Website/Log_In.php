@@ -30,6 +30,13 @@ require_once '../include/login_view.inc.php';
 		<div class="card-content">
 			<h1>Log In</h1>
 			<p>Log In now to enjoy member exclusive!! 	</p>
+			
+<?php
+//will print login error if input wrong or something like that;
+check_login__errors();
+ 
+
+ ?>
 			<form action = "../include/login.inc.php" method = "post">
 				<input type="text" name="email" placeholder="E-Mail">
 				<input type="password" name="pwd" placeholder="Password" id="Pass">
@@ -40,7 +47,7 @@ require_once '../include/login_view.inc.php';
 		</div>	
 	</div>
 	<h3>Need an Account?</h3>
-	<a href="Sign_Up.html"><button id="change">Sign Up</button></a>
+	<a href="Sign_Up.php"><button id="change">Sign Up</button></a>
 </div>
 
 <footer>

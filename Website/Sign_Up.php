@@ -1,3 +1,10 @@
+<?php 
+require_once '../include/config_session.inc.php';
+require_once '../include/signup_view.inc.php'; 
+require_once '../include/login_view.inc.php'; 
+
+?>
+
 <html>
 <head>
 	<title> Sign Up</title>
@@ -24,6 +31,11 @@
 		<div class="card-content">
 			<h1>Sign Up</h1>
 			<p>Sign Up now to enjoy member exclusive!!</p>
+			<?php
+			//for printing the error for the sign in
+        check_signup_errors(); 
+        
+        ?>
 			<form action = "../include/signup.inc.php" method = "post">
 			<input type="text" name="email" placeholder="E-Mail">
             <input  type="username" name="name" placeholder="Username">
@@ -35,7 +47,7 @@
 		</div>	
 	</div>
 	<h3>Already Have an Account?</h3>
-	<a href="Log_In.html"><button id="change">Log In</button></a>
+	<a href="Log_In.php"><button id="change">Log In</button></a>
 </div>
 
 
