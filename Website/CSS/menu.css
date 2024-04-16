@@ -34,15 +34,14 @@
 .menu{
 	display: flex;
 	justify-content: center;
-	
 	flex-wrap:wrap;
 }
 
 .card{
 	width:275px;
+	height:380px;
 	background-color:#f0f0f0;
 	border-radius:8px;
-	overflow:hidden;
 	box-shadow:0px 2px 4px rgba(0,0,0,0.2);
 	margin:20px;
 }
@@ -51,14 +50,18 @@
 	width:100%;
 	height:auto;
 }
-.card-content{
-	padding:10px;
-}
 
 .desc{
 	display: flex;
 	justify-content:space-between;
 	padding: 0 5px;
+	margin:5px 0 0;
+}
+
+.card-content{
+	display:grid;
+	grid-template-rows:50px 30px;
+	margin: 0 5px;
 }
 
 .card-content button{

@@ -19,6 +19,7 @@ if(isset($_SESSION['user_email'])) {
 	<title> Menu</title>
 	<link rel="stylesheet" href="CSS/home.css">
 	<link rel="stylesheet" href="CSS/menu.css">
+	<link rel="stylesheet" href="CSS/carts.css">
 </head>
 <body>
 <header>	
@@ -34,7 +35,7 @@ if(isset($_SESSION['user_email'])) {
 					 </form>
 				</div>
 			</div>
-			<a href="#"><img src="img/Cart.png" id="navtop_img"></a>
+			<img src="img/Cart.png" id="navtop_img" class="cartIcon">
 		</div>
 	</div>
 	<div class="navbar">
@@ -93,59 +94,62 @@ foreach($foods as $food) {
     "; 
 }
 ?>
-		<!-- <div class="card">
-			<img src="img/cheese burger.jpg">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button class="foodButtons" data-food-id="WS01">Add to Cart</button>
-				<span id="cartIdDisplay"></span>
-			</div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button>
-			</div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button> -->
-			<!-- </div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button>
-			</div>	
-		</div>
-		<div class="card">
-			<img src="img/item.png">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
-				</div>
-				<button>Add to Cart</button>
-			</div>	
-		</div> -->
 	</div>
 </div>
+<aside class="">
+	<form id="cart">
+		<div class="cartTab">
+			<h1>Shopping Cart</h1>
+			<div class="listcart">
+			<!-- start copy -->
+				<div class="cartItem">	
+					<div class="name">
+						NAME
+					</div>
+					<div class="cartPrice">
+						$$$
+					</div>
+					<div class="cartQuantity">
+						<button><</button>
+						<span>0</span>
+						<button>></button>
+					</div>
+				</div>
+			<!-- End Copy -->
+			
+				<div class="checkOut">
+						<h1>Location:</h1>
+					<div class="locOpt">
+						<button onclick="delAddress(0)">Dine In</button>
+						<button onclick="delAddress(1)">Delivery</button>
+					</div>
+					<div class="delLoc">
+					 <textarea id="delAddress" ></textarea>
+					</div>
+					<h1>Payment Option:</h1>
+					<div class="payOpt">
+						<select>
+							<option value="card">Card</option>
+						  <option value="grab">Grab</option>
+						  <option value="TNG">Touch 'n Go</option>
+						  <option value="Spay">Shopee Pay</option>
+						</select>
+					</div>
+					<h1>Total payment:</h1>
+					<div class="totalPay">
+						<h1>
+							$$$
+						</h1>
+					</div>
+				</div>	
+			</div>
+			<div class="cartbutton">
+				<button class="close">Close</button>
+				<button class="checkOut">Place Order</button>
+			</div>
+		</div>
+	</form>
+</aside>
 <footer>
 	<div class="line">
 		<hr width="80%" />
@@ -183,6 +187,7 @@ foreach($foods as $food) {
 the other JS file from other folder, i don't know how but just change the js folder name
 and change the source of the folder and should be working fine -->
 <script src="JSA/addToCart.js"></script>
+<script src="JSA/cart.js"></script>
 
 </body>
 </html>
