@@ -41,8 +41,7 @@ if(isset($_SESSION['user_email'])) {
 		<ul>
 			<li><a href="home.php" style="color:red;">Home</a></li>
 			<li><a href="menu.php">Menu</a></li>
-			<li><a href="#">Promotion</a></li>
-			<li><a href="#">Delivery</a></li>
+			<li><a href="History.php">Order History</a></li>
 			<li><a href="#">About us</a></li>
 		</ul>
 	</div>		
