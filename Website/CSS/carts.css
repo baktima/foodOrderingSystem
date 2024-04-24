@@ -1,0 +1,121 @@
+.cartTab{
+	width:400px;
+	background-color:#4a4a4a;
+	color:white;
+	position:fixed;
+	z-index:+1;
+	inset:5px -400px 5px auto;
+	display:grid; 	
+	grid-template-rows:70px 1fr 70px;
+}
+
+.cartTab h1{
+	padding:20px;
+	margin:0;
+	font-weight:300;
+}
+
+.cartbutton{
+	display:grid;
+	grid-template-columns: repeat(2,1fr);
+}
+
+.cartbutton button{
+	width:100%;
+	border:none;
+	bottom:0;
+}
+
+.cartbutton button:hover{
+	cursor: pointer;
+	background-color:red;
+	color:white;
+}
+
+.cartItem{
+	margin:10px 10px;
+	padding:10px;
+	display: grid;
+	grid-template-columns:120px 120px 120px;
+	text-align:center;
+	align-items:center;
+}
+.cartQuantity{
+	display:flex;
+	justify-content:end;
+	padding:10px auto;
+
+}
+.cartQuantity button{
+	display:inline-block;
+	width:25px;
+	height:3x5px;
+	background-color:white;
+	color:#555;
+	border-radius:50%;
+	cursor:pointer;
+	border:none;
+}
+.cartQuantity button:active{
+	background-color:c2c5b7;
+}
+.cartQuantity span{
+	background-color:transparent;
+	color:white;
+	cursor:default;
+	width:25px;
+	height:25px;
+}
+
+.cartItem:nth-child(even){
+	background-color:#575757;
+}
+
+.listcart{
+	overflow:auto;
+}
+
+.listcart::-webkit-scrollbar{
+	width:0;
+}
+
+aside.showCart .cartTab{
+	inset:5px 0 5px auto;
+}
+.checkout div{
+	margin: 20px 0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.locOpt button{
+	margin: 0 10px;
+	width:175px;
+	height:30px;
+	border:none;
+	border-radius:50px;
+}
+.locOpt button:hover{
+	cursor: pointer;
+	background-color:red;
+	color:white;
+}
+
+.PayOpt select {
+  width: 100%;
+  font-size: 17px;
+  padding: 0.675em 6em 0.675em 1em;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.delLoc textarea{
+	width:90%;
+	height:50px;
+	resize:none;
+	border:none;
+	border-radius:10px;
+	font-size:10px;
+	padding:5px;
+}
