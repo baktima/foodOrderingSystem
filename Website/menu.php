@@ -58,8 +58,8 @@ if(isset($_SESSION['user_email'])) {
 			<li><a href="menu.php"><b>All</b></a></li>
 			<li><a href="western.php">Western</a></li>
 			<li><a href="japanese.php">Japanese</a></li>
-			<li><a href="#">Chinese</a></li>
-			<li><a href="#">Arabic</a></li>
+			<li><a href="chinese.php">Chinese</a></li>
+			<li><a href="arabic.php">Arabic</a></li>
 			<li><a href="#">Beverages</a></li>
 		</ul>
 	</div>

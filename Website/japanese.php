@@ -57,9 +57,9 @@ if(isset($_SESSION['user_email'])) {
 			<li><a href="menu.php">All</a></li>
 			<li><a href="western.php">Western</b></a></li>
 			<li><a href="japanese.php"><b>Japanese</b></a></li>
-			<li><a href="#">Chinese</a></li>
-			<li><a href="#">Arabic</a></li>
-			<li><a href="#">Beverages</a></li>
+			<li><a href="chinese.php">Chinese</a></li>
+			<li><a href="arabic.php">Arabic</a></li>
+			<li><a href="beverages.php">Beverages</a></li>
 		</ul>
 	</div>
 	<div class="menu">
@@ -134,6 +134,7 @@ foreach($foods as $food) {
 the other JS file from other folder, i don't know how but just change the js folder name
 and change the source of the folder and should be working fine -->
 <script src="JSA/addToCart.js"></script>
+<script src="JSA/cart.js"></script>
 
 </body>
 </html>

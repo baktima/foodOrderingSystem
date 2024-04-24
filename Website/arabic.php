@@ -55,10 +55,10 @@ if(isset($_SESSION['user_email'])) {
 		<h2>Category</h2>
 		<ul>
 			<li><a href="menu.php">All</a></li>
-			<li><a href="western.php"><b>Western</b></a></li>
+			<li><a href="western.php">Western</b></a></li>
 			<li><a href="japanese.php">Japanese</a></li>
 			<li><a href="chinese.php">Chinese</a></li>
-			<li><a href="arabic.php">Arabic</a></li>
+			<li><a href="arabic.php"><b>Arabic</b></a></li>
 			<li><a href="beverages.php">Beverages</a></li>
 		</ul>
 	</div>
@@ -76,7 +76,7 @@ $foods = $statement->fetchAll(PDO::FETCH_ASSOC);
 // Loop through each food item and display it
 foreach($foods as $food) {
 
-	if($food["Type_id"] == "FT01") {
+	if($food["Type_id"] == "FT05") {
 	$imageData = base64_encode($food['image']);
 
     echo "
