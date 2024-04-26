@@ -1,7 +1,8 @@
 <?php 
 require_once '../include/config_session.inc.php'; 
-
+require_once '../include/dbh.inc.php';
 ?>
+
 <?php
 // Check if the user is logged in and email is set in the session
 //also getting the email from the database
@@ -13,14 +14,13 @@ if(isset($_SESSION['user_email'])) {
 }
 ?>
 
-
 <html>
 <head>
-	<title> Home</title>
+	<title> Menu</title>
 	<link rel="stylesheet" href="CSS/home.css">
+	<link rel="stylesheet" href="CSS/menu.css">
 </head>
 <body>
-
 <header>	
 	<div class="navtop">
 	<img src="img/Logo.png" id="navtop_img">
@@ -28,7 +28,7 @@ if(isset($_SESSION['user_email'])) {
 			<div class="dropdown">
 				<button id="profile"><img src ="img/profile.png"><span><?php echo $email; ?></span></button>
 				<div class="dropdown-content">
-					<a href="edit_user.php">User Profile</a>
+					<a href="edit_user.html">User Profile</a>
 					<form action = "../include/logout.inc.php" method = "post">
 						<button><span>Log out</span></button>
 					 </form>
@@ -39,8 +39,8 @@ if(isset($_SESSION['user_email'])) {
 	</div>
 	<div class="navbar">
 		<ul>
-			<li><a href="home.php" style="color:red;">Home</a></li>
-			<li><a href="menu.php">Menu</a></li>
+			<li><a href="home.php">Home</a></li>
+			<li><a href="menu.php" style="color:red;">Menu</a></li>
 			<li><a href="History.php">Order History</a></li>
 			<li><a href="#">About us</a></li>
 		</ul>
@@ -49,26 +49,53 @@ if(isset($_SESSION['user_email'])) {
 		<hr width="80%" />
 	</div>
 </header>
-
-<section>
-	<div class="banner">
-		<div class="banner-desc">
-			<h1>Start Ordering Now!!</h1>
-		</div>
-		<div>
-			<a href="menu.html"><button><span id="button-text">Menu</span></button></a>
-		</div>
+<div class="content">
+	<div class="Category">
+		<h2>Category</h2>
+		<ul>
+			<li><a href="menu.php">All</a></li>
+			<li><a href="western.php">Western</b></a></li>
+			<li><a href="japanese.php">Japanese</a></li>
+			<li><a href="chinese.php">Chinese</a></li>
+			<li><a href="arabic.php">Arabic</a></li>
+			<li><a href="beverages.php"><b>Beverages</b></a></li>
+		</ul>
 	</div>
-</section>
+	<div class="menu">
 
-<div class="app-advert">
-	<img src="img/app_banner.png">
-	<div class="store-link">
-		<a href="#"><img src="img/appstore_icon.png"></a>
-		<a href="#"><img src="img/playstore_icon.png"></a>
+	<?php 
+$query = "SELECT * FROM food";
+$statement = $pdo->prepare($query);
+$statement->execute();
+
+// Fetch all results as an associative array
+$foods = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Loop through each food item and display it
+foreach($foods as $food) {
+
+	if($food["Type_id"] == "FT03") {
+	$imageData = base64_encode($food['image']);
+
+    echo "
+		<div class='card'>
+        	<img src='data:image/jpg;base64,{$imageData}'>            
+        	<div class='card-content'>
+            	<div class='desc'>
+                	<h3>{$food['name']}</h3> 
+                	<h4>{$food['price']}</h4> 
+				</div>
+            	<button class='foodButtons' data-food-id='{$food['food_id']}'>Add to Cart</button>
+            	<span id='cartIdDisplay'></span> 
+        </div>
+		</div>  
+    "; 
+}
+}
+?>
 	</div>
 </div>
-
 <footer>
 	<div class="line">
 		<hr width="80%" />
@@ -97,5 +124,16 @@ if(isset($_SESSION['user_email'])) {
 		</div>
 	</div>
 </footer>
+
+<script>
+    var email = "<?php echo $email; ?>";
+</script>
+
+<!-- this is really important, i change the folder into JSA cause if JS only, it detects
+the other JS file from other folder, i don't know how but just change the js folder name
+and change the source of the folder and should be working fine -->
+<script src="JSA/addToCart.js"></script>
+<script src="JSA/cart.js"></script>
+
 </body>
 </html>

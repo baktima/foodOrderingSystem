@@ -1,7 +1,8 @@
 <?php 
 require_once '../include/config_session.inc.php'; 
-
+require_once '../include/dbh.inc.php';
 ?>
+
 <?php
 // Check if the user is logged in and email is set in the session
 //also getting the email from the database
@@ -11,16 +12,55 @@ if(isset($_SESSION['user_email'])) {
     // Handle if the user is not logged in
     $email = null;
 }
-?>
 
+if ($email){
+    $query = "SELECT customer.*, customer_name.name
+              FROM customer
+              INNER JOIN customer_name ON customer.customer_ID = customer_name.customer_ID
+              WHERE customer.email = :email";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':email', $email);
+    $statement->execute(); 
+
+    $persons = $statement->fetchAll(PDO::FETCH_ASSOC); 
+    
+    // Check if any rows were returned
+    if ($persons) {
+        // Loop through each row in the result set
+        foreach ($persons as $person) {
+            $name = $person['name'];
+            // Process the name as needed
+        }
+    } else {
+        $name=null;
+    }
+	
+}
+
+
+
+
+?>
 
 <html>
 <head>
-	<title> Home</title>
+<title>Edit User</title>
+	<link rel="stylesheet" href="CSS/edit_user.css">
 	<link rel="stylesheet" href="CSS/home.css">
+	<link rel="stylesheet" href="CSS/carts.css">
+	
+	<script>
+	function ShowPass() {
+	  var x = document.getElementById("Pass");
+	  if (x.type === "password") {
+		x.type = "text";
+	  } else {
+		x.type = "password";
+	  }
+	}
+	</script>
 </head>
 <body>
-
 <header>	
 	<div class="navtop">
 	<img src="img/Logo.png" id="navtop_img">
@@ -34,12 +74,12 @@ if(isset($_SESSION['user_email'])) {
 					 </form>
 				</div>
 			</div>
-			<a href="#"><img src="img/Cart.png" id="navtop_img"></a>
+			<img src="img/Cart.png" id="navtop_img" class="cartIcon">
 		</div>
 	</div>
 	<div class="navbar">
 		<ul>
-			<li><a href="home.php" style="color:red;">Home</a></li>
+			<li><a href="home.php">Home</a></li>
 			<li><a href="menu.php">Menu</a></li>
 			<li><a href="History.php">Order History</a></li>
 			<li><a href="#">About us</a></li>
@@ -49,26 +89,27 @@ if(isset($_SESSION['user_email'])) {
 		<hr width="80%" />
 	</div>
 </header>
-
-<section>
-	<div class="banner">
-		<div class="banner-desc">
-			<h1>Start Ordering Now!!</h1>
-		</div>
-		<div>
-			<a href="menu.html"><button><span id="button-text">Menu</span></button></a>
-		</div>
-	</div>
-</section>
-
-<div class="app-advert">
-	<img src="img/app_banner.png">
-	<div class="store-link">
-		<a href="#"><img src="img/appstore_icon.png"></a>
-		<a href="#"><img src="img/playstore_icon.png"></a>
+<div class="container">
+	<div class="card">			
+		<div class="card-content">
+			<h1>User Profile</h1>
+			<form action='../include/user_profile.inc.php' method = "post">
+			<span>E-mail</span>
+            <input type="text" name="email" value="<?php echo $email; ?>" placeholder="E-Mail">
+                
+            <span>Username</span>
+            <input type="text" name="name"  value="<?php echo $name; ?>" placeholder="Username">
+                
+            <span>Password</span>
+            <input type="password" name="pwd"  placeholder="New Password" id="Pass" >
+			<button onclick="ShowPass(); return false;" id="show-button">Show</button>
+			<br>
+		   <button id="acc">Apply</button>
+		   <input type="reset" id="acc" value="Reset">
+			</form>
+		</div>	
 	</div>
 </div>
-
 <footer>
 	<div class="line">
 		<hr width="80%" />

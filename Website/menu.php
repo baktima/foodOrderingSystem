@@ -1,7 +1,8 @@
 <?php 
 require_once '../include/config_session.inc.php'; 
-
+require_once '../include/dbh.inc.php';
 ?>
+
 <?php
 // Check if the user is logged in and email is set in the session
 //also getting the email from the database
@@ -18,7 +19,7 @@ if(isset($_SESSION['user_email'])) {
 	<title> Menu</title>
 	<link rel="stylesheet" href="CSS/home.css">
 	<link rel="stylesheet" href="CSS/menu.css">
-	<link rel="stylesheet" href="CSS/cart.css">
+	<link rel="stylesheet" href="CSS/carts.css">
 </head>
 <body>
 <header>	
@@ -28,7 +29,7 @@ if(isset($_SESSION['user_email'])) {
 			<div class="dropdown">
 				<button id="profile"><img src ="img/profile.png"><span><?php echo $email; ?></span></button>
 				<div class="dropdown-content">
-					<a href="edit_user.html">User Profile</a>
+					<a href="edit_user.php">User Profile</a>
 					<form action = "../include/logout.inc.php" method = "post">
 						<button><span>Log out</span></button>
 					 </form>
@@ -41,8 +42,7 @@ if(isset($_SESSION['user_email'])) {
 		<ul>
 			<li><a href="home.php">Home</a></li>
 			<li><a href="menu.php" style="color:red;">Menu</a></li>
-			<li><a href="#">Promotion</a></li>
-			<li><a href="#">Delivery</a></li>
+			<li><a href="History.php">Order History</a></li>
 			<li><a href="#">About us</a></li>
 		</ul>
 	</div>		
@@ -54,182 +54,100 @@ if(isset($_SESSION['user_email'])) {
 	<div class="Category">
 		<h2>Category</h2>
 		<ul>
-			<li><a href="#">type</a></li>
-			<li><a href="#">type</a></li>
-			<li><a href="#">type</a></li>
-			<li><a href="#">type</a></li>
-			<li><a href="#">type</a></li>
-			<li><a href="#">type</a></li>
+			<li><a href="menu.php"><b>All</b></a></li>
+			<li><a href="western.php">Western</a></li>
+			<li><a href="japanese.php">Japanese</a></li>
+			<li><a href="chinese.php">Chinese</a></li>
+			<li><a href="arabic.php">Arabic</a></li>
+			<li><a href="#">Beverages</a></li>
 		</ul>
 	</div>
 	<div class="menu">
-		<div class="card">
-			<img src="img/cheese burger.jpg">			
-			<div class="card-content">
-				<div class="desc">
-					<h2>food</h2>
-					<h4>$$$</h4>
+
+	<?php 
+$query = "SELECT * FROM food";
+$statement = $pdo->prepare($query);
+$statement->execute();
+
+// Fetch all results as an associative array
+$foods = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Loop through each food item and display it
+foreach($foods as $food) {
+
+	$imageData = base64_encode($food['image']);
+
+    echo "
+		<div class='card'>
+        	<img src='data:image/jpg;base64,{$imageData}'>            
+        	<div class='card-content'>
+            	<div class='desc'>
+                	<h3>{$food['name']}</h3> 
+                	<h4>{$food['price']}</h4> 
 				</div>
-				<button class="foodButtons" data-food-id="WS01">Add to Cart</button>
-				<span id="cartIdDisplay"></span>
-			</div>	
-		</div>
+            	<button class='foodButtons' data-food-id='{$food['food_id']}'>Add to Cart</button>
+            	<span id='cartIdDisplay'></span> 
+        </div>
+		</div>  
+    "; 
+}
+?>
 	</div>
 </div>
 <aside class="">
-<div class="cartTab">
-		<h1>Shopping Cart</h1>
-		<div class="listcart">
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-		<!-- start copy -->
-			<div class="cartItem">	
-				<div class="name">
-					NAME
-				</div>
-				<div class="cartPrice">
-					$$$
-				</div>
-				<div class="cartQuantity">
-					<button><</button>
-					<span>0</span>
-					<button>></button>
-				</div>
-			</div>
-		<!-- End Copy -->
-			<div class="checkOut">
-					<h1>Location:</h1>
-				<div class="delLoc">
-					<button class="">Dine In</button>
-					<button class="">Delivery</button>
-				</div>
-				<h1>Payment Option:</h1>
-				<div class="payOpt">	
-					<form>
-					<select>
-						<option value="card">Card</option>
-					  <option value="grab">Grab</option>
-					  <option value="TNG">Touch 'n Go</option>
-					  <option value="Spay">Shopee Pay</option>
-					</select>
-					</form>
-				</div>
-				<h1>Total payment:</h1>
-				<div class="totalPay">
-					<h1>
+	<form id="cart">
+		<div class="cartTab">
+			<h1>Shopping Cart</h1>
+			<div class="listcart">
+			<!-- start copy -->
+				<div class="cartItem">	
+					<div class="name">
+						NAME
+					</div>
+					<div class="cartPrice">
 						$$$
-					</h1>
+					</div>
+					<div class="cartQuantity">
+						<button><</button>
+						<span>0</span>
+						<button>></button>
+					</div>
 				</div>
-			</div>	
+			<!-- End Copy -->
+			
+				<div class="checkOut">
+						<h1>Location:</h1>
+					<div class="locOpt">
+						<button onclick="delAddress(0)">Dine In</button>
+						<button onclick="delAddress(1)">Delivery</button>
+					</div>
+					<div class="delLoc">
+					 <textarea id="delAddress" ></textarea>
+					</div>
+					<h1>Payment Option:</h1>
+					<div class="payOpt">
+						<select>
+							<option value="card">Card</option>
+						  <option value="grab">Grab</option>
+						  <option value="TNG">Touch 'n Go</option>
+						  <option value="Spay">Shopee Pay</option>
+						</select>
+					</div>
+					<h1>Total payment:</h1>
+					<div class="totalPay">
+						<h1>
+							$$$
+						</h1>
+					</div>
+				</div>	
+			</div>
+			<div class="cartbutton">
+				<button class="close">Close</button>
+				<button class="checkOut">Place Order</button>
+			</div>
 		</div>
-		<div class="cartbutton">
-			<button class="close">Close</button>
-			<button class="checkOut">Place Order</button>
-		</div>
-	</div>
+	</form>
 </aside>
 <footer>
 	<div class="line">
