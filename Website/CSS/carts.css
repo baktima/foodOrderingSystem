@@ -50,7 +50,7 @@
 	display:inline-block;
 	width:25px;
 	height:3x5px;
-	background-color:white;
+	background-color:rgb(255, 255, 255);
 	color:#555;
 	border-radius:50%;
 	cursor:pointer;
@@ -82,23 +82,12 @@
 aside.showCart .cartTab{
 	inset:5px 0 5px auto;
 }
+
 .checkout div{
 	margin: 20px 0;
 	display:flex;
 	justify-content:center;
 	align-items:center;
-}
-.locOpt button{
-	margin: 0 10px;
-	width:175px;
-	height:30px;
-	border:none;
-	border-radius:50px;
-}
-.locOpt button:hover{
-	cursor: pointer;
-	background-color:red;
-	color:white;
 }
 
 .PayOpt select {
@@ -112,10 +101,20 @@ aside.showCart .cartTab{
 
 .delLoc textarea{
 	width:90%;
-	height:50px;
+	height: 100px;
 	resize:none;
 	border:none;
 	border-radius:10px;
 	font-size:10px;
 	padding:5px;
+	font-size: 15px;
+}
+
+.checkOut .Phone input[type="text"] {
+    width: 85%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }

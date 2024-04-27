@@ -28,7 +28,7 @@ if(isset($_SESSION['user_email'])) {
 			<div class="dropdown">
 				<button id="profile"><img src ="img/profile.png"><span><?php echo $email; ?></span></button>
 				<div class="dropdown-content">
-					<a href="edit_user.html">User Profile</a>
+					<a href="edit_user.php">User Profile</a>
 					<form action = "../include/logout.inc.php" method = "post">
 						<button><span>Log out</span></button>
 					 </form>

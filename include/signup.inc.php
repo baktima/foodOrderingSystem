@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         require_once 'config_session.inc.php'; 
 
 
-        //if there data inside the array errors, it will return true 
+        //if there data inside the array errors, it will return true x
         if($errors){ 
             $_SESSION["error_signup"] = $errors; 
             header("Location: ../Website/Sign_up.php");

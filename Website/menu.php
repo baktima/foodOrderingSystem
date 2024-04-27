@@ -13,7 +13,6 @@ if(isset($_SESSION['user_email'])) {
     $email = null;
 }
 ?>
-
 <html>
 <head>
 	<title> Menu</title>
@@ -29,7 +28,7 @@ if(isset($_SESSION['user_email'])) {
 			<div class="dropdown">
 				<button id="profile"><img src ="img/profile.png"><span><?php echo $email; ?></span></button>
 				<div class="dropdown-content">
-					<a href="edit_user.html">User Profile</a>
+					<a href="edit_user.php">User Profile</a>
 					<form action = "../include/logout.inc.php" method = "post">
 						<button><span>Log out</span></button>
 					 </form>
@@ -115,23 +114,22 @@ foreach($foods as $food) {
 					</div>
 				</div>
 			<!-- End Copy -->
-			
 				<div class="checkOut">
-						<h1>Location:</h1>
-					<div class="locOpt">
-						<button onclick="delAddress(0)">Dine In</button>
-						<button onclick="delAddress(1)">Delivery</button>
-					</div>
+						<h1>Delivery Location:</h1>
 					<div class="delLoc">
-					 <textarea id="delAddress" ></textarea>
+					 <textarea id="delAddress" name="address"></textarea>
+					</div>
+						<h1>Phone Number:</h1>
+					<div class="Phone">
+					<input type="text" name="Phone_Num">
 					</div>
 					<h1>Payment Option:</h1>
 					<div class="payOpt">
 						<select>
 							<option value="card">Card</option>
-						  <option value="grab">Grab</option>
-						  <option value="TNG">Touch 'n Go</option>
-						  <option value="Spay">Shopee Pay</option>
+							<option value="grab">Grab</option>
+							<option value="TNG">Touch 'n Go</option>
+							<option value="Spay">Shopee Pay</option>
 						</select>
 					</div>
 					<h1>Total payment:</h1>

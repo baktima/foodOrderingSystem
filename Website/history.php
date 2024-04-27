@@ -19,7 +19,7 @@ if(isset($_SESSION['user_email'])) {
 	<title> Menu</title>
 	<link rel="stylesheet" href="CSS/home.css">
 	<link rel="stylesheet" href="CSS/history.css">
-	<link rel="stylesheet" href="CSS/cart.css">
+	<link rel="stylesheet" href="CSS/carts.css">
 </head>
 </body>
 
