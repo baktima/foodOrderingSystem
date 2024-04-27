@@ -38,8 +38,6 @@ if ($email){
 }
 
 
-
-
 ?>
 
 <html>
@@ -81,7 +79,7 @@ if ($email){
 		<ul>
 			<li><a href="home.php">Home</a></li>
 			<li><a href="menu.php">Menu</a></li>
-			<li><a href="History.php">Order History</a></li>
+			<li><a href="history.php">Order History</a></li>
 			<li><a href="#">About us</a></li>
 		</ul>
 	</div>		

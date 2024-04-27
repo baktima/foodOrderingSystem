@@ -6,13 +6,13 @@ require_once 'profile_contr.inc.php'; // Include profile controller functions
 
 session_start(); // Start the session
 
+
 if(isset($_SESSION['user_email'])) {
-    $email = $_SESSION['user_email'];
+    $old_email = $_SESSION['user_email'];
 } else {
     // Handle if the user is not logged in
-    $email = null;
+    $old_email = null;
 }
-
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") { 
     $username = $_POST["name"];
@@ -23,24 +23,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors = []; 
 
         // Input Validation
-        if (empty($username) || empty($email)) { 
+        if (empty($username) || empty($newemail)) { 
             $errors["empty_input"] = "Fill in all required fields"; 
         }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($newemail, FILTER_VALIDATE_EMAIL)) {
             $errors["invalid_email"] = "Invalid email syntax";
         }
 
         if ($errors) { 
-            $_SESSION["error_edit_profile"] = $errors; 
-            header("Location: edit_profile.php");
+            $_SESSION["error_user"] = $errors; 
+            header("Location: ../Website/edit_user.php"); 
             exit();
         }
-
-        // Get user ID from session or any other method you're using to identify the user
         
+       // Update user information only if there are no errors
+        if(update_user($pdo, $old_email, $username, $newemail, $pwd)) {
+          $_SESSION['user_email'] = $newemail; // Update session with new email
+        }
 
-        // Update user information
-        update_user($pdo, $email, $username, $email, $pwd);
+       
 
         // Redirect user after successful update
         header("Location: {$_SERVER['PHP_SELF']}");
@@ -55,4 +56,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header("Location: ../Website/edit_user.php"); 
     exit();
 }
-?>
