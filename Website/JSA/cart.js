@@ -10,6 +10,3 @@ closecart.addEventListener('click',()=>{
 	aside.classList.toggle('showCart')
 });
 
-window.onload =function(){
-	document.getElementById("").style.display= "none"
-}
