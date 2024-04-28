@@ -121,7 +121,9 @@ WHERE customer.email = :email";
 
 	// Check if there are cart items
 	if ($cart_items) {
+		$total = 0;
 		foreach ($cart_items as $cart_item) {
+			$total += $cart_item['food_price']*$cart_item['food_quantity'];
 			// Print cart items
 			echo '
 <div class="cartItem" data-assigned-Cart-ID="' . $cart_item['cart_id'] . '">
@@ -168,15 +170,14 @@ WHERE customer.email = :email";
 					</div>
 					<h1>Total payment:</h1>
 					<div class="totalPay">
-						<h1>
-							$$$
-						</h1>
+						<h1><?php echo $total; ?></h1>
 					</div>
 				</div>	
 			</div>
 			<div class="cartbutton">
 				<button class="close">Close</button>
-				<button class="checkOut">Place Order</button>
+				<!-- <button class="checkOut">Place Order</button> -->
+				<button class='cartButtons'>Place Order</button>
 			</div>
 		</div>
 	</form>

@@ -56,7 +56,7 @@ if(isset($_SESSION['user_email'])) {
 			<h1>Start Ordering Now!!</h1>
 		</div>
 		<div>
-			<a href="menu.html"><button><span id="button-text">Menu</span></button></a>
+			<a href="menu.php"><button><span id="button-text">Menu</span></button></a>
 		</div>
 	</div>
 </section>
