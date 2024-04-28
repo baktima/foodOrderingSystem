@@ -58,7 +58,7 @@ if(isset($_SESSION['user_email'])) {
 			<li><a href="japanese.php">Japanese</a></li>
 			<li><a href="chinese.php">Chinese</a></li>
 			<li><a href="arabic.php">Arabic</a></li>
-			<li><a href="#">Beverages</a></li>
+			<li><a href="beverages.php">Beverages</a></li>
 		</ul>
 	</div>
 	<div class="menu">
@@ -217,7 +217,7 @@ WHERE customer.email = :email";
 <!-- this is really important, i change the folder into JSA cause if JS only, it detects
 the other JS file from other folder, i don't know how but just change the js folder name
 and change the source of the folder and should be working fine -->
-<script src="JSA/menu.js"></script>
+<script src="JSA/addToCarts.js"></script>
 
 </body>
 </html>

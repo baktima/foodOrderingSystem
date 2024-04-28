@@ -19,6 +19,7 @@ if(isset($_SESSION['user_email'])) {
 	<title> Menu</title>
 	<link rel="stylesheet" href="CSS/home.css">
 	<link rel="stylesheet" href="CSS/menu.css">
+	<link rel="stylesheet" href="CSS/carts.css">
 </head>
 <body>
 <header>	
@@ -28,13 +29,13 @@ if(isset($_SESSION['user_email'])) {
 			<div class="dropdown">
 				<button id="profile"><img src ="img/profile.png"><span><?php echo $email; ?></span></button>
 				<div class="dropdown-content">
-					<a href="edit_user.html">User Profile</a>
+				<a href="edit_user.php">User Profile</a>
 					<form action = "../include/logout.inc.php" method = "post">
 						<button><span>Log out</span></button>
 					 </form>
 				</div>
 			</div>
-			<a href="#"><img src="img/Cart.png" id="navtop_img"></a>
+			<img src="img/Cart.png" id="navtop_img" class="cartIcon">
 		</div>
 	</div>
 	<div class="navbar">
@@ -96,6 +97,93 @@ foreach($foods as $food) {
 ?>
 	</div>
 </div>
+<aside class="">
+	<form id="cart">
+		<div class="cartTab">
+			<h1>Shopping Cart</h1>
+			<div class="listcart">
+				<div class="cart_items">
+			<!-- start copy -->
+			<script>console.log("pepek1");</script>
+
+<?php
+
+echo '<script src="JSA/cart.js"></script>';
+echo '<script src="JSA/updateCart.js"></script>';
+//Fetch cart items only if the user is logged in and has an email set
+if ($email) {
+	$query = "SELECT cart.*, food.name AS food_name, food.price AS food_price 
+FROM cart 
+JOIN food ON cart.food_id = food.food_id 
+JOIN customer ON cart.cart_id = customer.assigned_Cart_ID 
+WHERE customer.email = :email";
+	$statement = $pdo->prepare($query);
+	$statement->bindParam(':email', $email);
+	$statement->execute();
+	$cart_items = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+	// Check if there are cart items
+	if ($cart_items) {
+		foreach ($cart_items as $cart_item) {
+			// Print cart items
+			echo '
+<div class="cartItem" data-assigned-Cart-ID="' . $cart_item['cart_id'] . '">
+<div class="name">' . $cart_item['food_name'] . '</div>
+<div class="cartPrice">' . $cart_item['food_price'] . '</div>
+<div class="cartQuantity">
+<button type="button" class="decrease">-</button>
+<span class="quantity">' . $cart_item['food_quantity'] . '</span>
+<button type="button" class="increase">+</button>
+<div class="foodID" data-assigned-Cart-ID="' . $cart_item['food_id'] . '"></div>
+</div>
+</div>';
+		}
+	} else {
+		// Handle case when there are no cart items
+		echo '<div class="emptyCartMessage">Your cart is empty</div>';
+	}
+}
+?>
+
+
+<script>
+	console.log("pepek2");
+</script>
+<!-- End Copy -->
+			</div>
+				<div class="checkOut">
+						<h1>Delivery Location:</h1>
+					<div class="delLoc">
+					 <textarea id="delAddress" name="address"></textarea>
+					</div>
+						<h1>Phone Number:</h1>
+					<div class="Phone">
+					<input type="text" name="Phone_Num">
+					</div>
+					<h1>Payment Option:</h1>
+					<div class="payOpt">
+						<select>
+							<option value="card">Card</option>
+							<option value="grab">Grab</option>
+							<option value="TNG">Touch 'n Go</option>
+							<option value="Spay">Shopee Pay</option>
+						</select>
+					</div>
+					<h1>Total payment:</h1>
+					<div class="totalPay">
+						<h1>
+							$$$
+						</h1>
+					</div>
+				</div>	
+			</div>
+			<div class="cartbutton">
+				<button class="close">Close</button>
+				<button class="checkOut">Place Order</button>
+			</div>
+		</div>
+	</form>
+</aside>
 <footer>
 	<div class="line">
 		<hr width="80%" />
@@ -133,7 +221,6 @@ foreach($foods as $food) {
 the other JS file from other folder, i don't know how but just change the js folder name
 and change the source of the folder and should be working fine -->
 <script src="JSA/addToCart.js"></script>
-<script src="JSA/cart.js"></script>
 
 </body>
 </html>
