@@ -99,21 +99,55 @@ foreach($foods as $food) {
 		<div class="cartTab">
 			<h1>Shopping Cart</h1>
 			<div class="listcart">
+				<div class="cart_items">
 			<!-- start copy -->
-				<div class="cartItem">	
-					<div class="name">
-						NAME
-					</div>
-					<div class="cartPrice">
-						$$$
-					</div>
-					<div class="cartQuantity">
-						<button><</button>
-						<span>0</span>
-						<button>></button>
-					</div>
-				</div>
-			<!-- End Copy -->
+			<script>console.log("pepek1");</script>
+
+<?php
+
+echo '<script src="JSA/cart.js"></script>';
+echo '<script src="JSA/updateCart.js"></script>';
+//Fetch cart items only if the user is logged in and has an email set
+if ($email) {
+	$query = "SELECT cart.*, food.name AS food_name, food.price AS food_price 
+FROM cart 
+JOIN food ON cart.food_id = food.food_id 
+JOIN customer ON cart.cart_id = customer.assigned_Cart_ID 
+WHERE customer.email = :email";
+	$statement = $pdo->prepare($query);
+	$statement->bindParam(':email', $email);
+	$statement->execute();
+	$cart_items = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+	// Check if there are cart items
+	if ($cart_items) {
+		foreach ($cart_items as $cart_item) {
+			// Print cart items
+			echo '
+<div class="cartItem" data-assigned-Cart-ID="' . $cart_item['cart_id'] . '">
+<div class="name">' . $cart_item['food_name'] . '</div>
+<div class="cartPrice">' . $cart_item['food_price'] . '</div>
+<div class="cartQuantity">
+<button type="button" class="decrease">-</button>
+<span class="quantity">' . $cart_item['food_quantity'] . '</span>
+<button type="button" class="increase">+</button>
+<div class="foodID" data-assigned-Cart-ID="' . $cart_item['food_id'] . '"></div>
+</div>
+</div>';
+		}
+	} else {
+		// Handle case when there are no cart items
+		echo '<div class="emptyCartMessage">Your cart is empty</div>';
+	}
+}
+?>
+
+
+<script>
+	console.log("pepek2");
+</script>
+<!-- End Copy -->
+			</div>
 				<div class="checkOut">
 						<h1>Delivery Location:</h1>
 					<div class="delLoc">
@@ -183,8 +217,7 @@ foreach($foods as $food) {
 <!-- this is really important, i change the folder into JSA cause if JS only, it detects
 the other JS file from other folder, i don't know how but just change the js folder name
 and change the source of the folder and should be working fine -->
-<script src="JSA/addToCart.js"></script>
-<script src="JSA/cart.js"></script>
+<script src="JSA/menu.js"></script>
 
 </body>
 </html>
