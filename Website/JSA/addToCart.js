@@ -27,6 +27,55 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     });
 
+    // Add event listeners to cart buttons
+    var cartButtons = document.querySelectorAll('.cartButtons');
+    cartButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '../Website/PHP/getData.php?email=' +encodeURIComponent(email), true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+
+                if (xhr.status === 200) {
+
+                    var cartID = xhr.responseText;
+                    var trimmedCartID = cartID.replace(/^"|"$/g, '');
+                    clearCart(trimmedCartID);
+
+                } else {
+                    // Handle errors if any
+                    alert('Error adding food item to cart1!');
+                }
+            }
+        };
+        xhr.send();
+    });
+    });
+
+    // Function to Empty Cart after checkout
+    function clearCart(cart_id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../Website/PHP/clear_cart.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log('Item deleted successfull');
+                    // Update UI or perform any necessary actions
+                } else {
+                    console.error('Error occurred:', xhr.statusText);
+                }
+            }
+        };
+        
+        xhr.send('cart_ID=' + encodeURIComponent(cart_id));
+        console.log(cart_id);
+    
+    }
+
+
+
     // Function to add item to cart
     function addToCart(foodId,cartId) {
         const xhr = new XMLHttpRequest();
