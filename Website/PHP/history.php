@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Sanitize the inputs to prevent SQL injection
         $cart_ID = htmlspecialchars($_POST['cart_ID']);
 
-        $query = "SELECT * FROM Cart WHERE Cart_ID = :CartID";
+        $query = "SELECT * FROM cart WHERE cart_id = :CartID";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':CartID', $CartID);
         $stmt->execute();
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $quantity = $cartRecord['quantity'];
     
             // Insert the record into the History table
-            $insertQuery = "INSERT INTO History (food_id, quantity, DateColumn) VALUES (:foodID, :quantity, :currentDateTime)";
+            $insertQuery = "INSERT INTO history (food_id, quantity, dateColumn) VALUES (:foodID, :quantity, NOW())";
             $insertStmt = $pdo->prepare($insertQuery);
             $insertStmt->bindParam(':foodID', $foodID);
             $insertStmt->bindParam(':quantity', $quantity);
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insertStmt->execute();
             
             // Search for a record in the Checkout table with matching Cart ID
-            $checkoutQuery = "SELECT CheckoutID FROM Checkout WHERE CartID = :CartID";
+            $checkoutQuery = "SELECT check_out_id FROM checkout WHERE cart_ID = :CartID";
             $checkoutStmt = $pdo->prepare($checkoutQuery);
             $checkoutStmt->bindParam(':CartID', $CartID);
             $checkoutStmt->execute();
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // If Checkout ID is found, update the corresponding record in the History table
             if ($checkoutID) {
-                $updateQuery = "UPDATE History SET CheckoutID = :checkoutID WHERE food_id = :foodID AND quantity = :quantity AND DateColumn = :currentDateTime";
+                $updateQuery = "UPDATE history SET checkOutId = :checkoutID WHERE food_id = :foodID AND quantity = :quantity AND dateColumn = NOW()";
                 $updateStmt = $pdo->prepare($updateQuery);
                 $updateStmt->bindParam(':checkoutID', $checkoutID);
                 $updateStmt->bindParam(':foodID', $foodID);

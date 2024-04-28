@@ -79,9 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // Function to checkout
     function checkout(cart_id, total_price) {
+        console.log("pepek sapi");
+        var totalPayment = updateTotalPayment();
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '../Website/PHP/checkout.php');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -93,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
         const data = {
-            total_price: totals,
+            total_price: totalPayment,
             cart_Id: cart_id // You may need to adjust this if cart ID is required
         };
         xhr.send(JSON.stringify(data));
@@ -106,18 +108,16 @@ function history(cart_id) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                console.log('History successfull');
+                console.log('History successful');
                 // Update UI or perform any necessary actions
             } else {
                 console.error('Error occurred:', xhr.statusText);
             }
         }
     };
-    const data = {
-        cart_Id: cart_id // You may need to adjust this if cart ID is required
-    };
-    xhr.send(JSON.stringify(data));
+    xhr.send('cart_ID=' + encodeURIComponent(cart_id));
 }
+
 
 
     // Function to add item to cart
@@ -302,6 +302,7 @@ function history(cart_id) {
         
                 // Display the total payment in the UI
                 document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+                return totalPayment;
             }
             updateTotalPayment()
             
@@ -319,6 +320,7 @@ function history(cart_id) {
     
             // Display the total payment in the UI
             document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+            return totalPayment; 
         }
         updateTotalPayment()
     
