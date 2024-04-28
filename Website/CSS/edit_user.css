@@ -1,0 +1,58 @@
+.container{
+	display: grid;
+	justify-content:center;
+}	
+.card{
+	width:400px;
+	overflow:hidden;
+	box-shadow:0px 2px 4px rgba(0,0,0,0.8);
+	margin:20px;
+}
+
+.card-content{
+	padding:30px;
+}
+.card-content form{
+	margin:10px 0;
+}
+input[type=text],input[type=password],input[type=username]{
+	 padding:12px 20px;
+	 margin:15px 0;
+	 border:none;
+	 border-radius:8px;
+}
+input[type=username],input[type=text]{
+	width: 100%;
+}
+
+#pass{
+	width: 80%;
+}
+#show-button{
+	background-color:white;
+	border:none;
+}
+
+#show-button:hover{
+	cursor:pointer;
+	color:red;
+}
+
+#show-button:active{
+	color:red;
+}
+
+#acc{
+	height:50px;
+	width:100%;
+	background-color:white;
+	border-style:solid;
+	border-width:5.5px;
+	border-radius:30px;	
+}	
+#acc:hover{
+	
+	background-color:black;
+	color:white;
+	cursor:pointer;
+}

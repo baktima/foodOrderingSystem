@@ -35,15 +35,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         require_once 'config_session.inc.php'; 
 
 
-        //if there data inside the array errors, it will return true 
+        //if there data inside the array errors, it will return true x
         if($errors){ 
             $_SESSION["error_signup"] = $errors; 
-            header("Location: ../index.php");
+            header("Location: ../Website/Sign_up.php");
             die();
         }
 
         create_user($pdo, $email, $pwd, $username);
-        header("Location: ../index.php?signup=success"); 
+        header("Location: ../Website/Log_In.php"); 
 
         $pdo = null; 
         $stmt = null; 
@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
 }
 else{
-    header("Location: ../index.php"); 
+    header("Location: ../Website/Sign_Up.php"); 
 
     die();// stop running the next codes
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1); 
+declare(stricttypes=1); 
 
 function get_email(object $pdo, string $email){ 
     $query = "SELECT email FROM customer WHERE email = :email;"; 
@@ -13,8 +13,9 @@ function get_email(object $pdo, string $email){
 }
 
 function set_user(object $pdo, string $email, string $pwd, string $username){ 
-    $query = "INSERT INTO customer(email, passkey) VALUES (:email, :pwd);
-    INSERT INTO customer_name(email, name) VALUES(:email, :username); "; 
+    //made new change here
+    $query = "INSERT INTO customer(email, passkey, customer_ID,assigned_Cart_ID) VALUES (:email, :pwd, :customer_ID, :cart_ID);
+    INSERT INTO customer_name(customer_ID, name) VALUES(:customer_ID, :username); "; 
     $stmt = $pdo -> prepare($query); 
 
     //somekind of security thingy 
@@ -26,7 +27,21 @@ function set_user(object $pdo, string $email, string $pwd, string $username){
 
     $stmt -> bindParam(":username", $username); 
     $stmt-> bindParam(":email", $email); 
-    $stmt-> bindParam(":pwd", $hashedPwd); 
+    $stmt-> bindParam(":pwd", $hashedPwd);
+    $stmt-> bindParam(":customer_ID", generateCustomerId());
+    $stmt-> bindParam(":cart_ID", generateCartId());
     $stmt->execute(); 
+
+}
+
+function generateCustomerId() {
+    // Generate a unique ID based on timestamp and random number
+    $customerId = 'CUSTOMER' . uniqid() . '' . mt_rand(1000, 9999);
+    return $customerId;
+}
+
+function generateCartId(){ 
+    $cartId = 'CART' . uniqid() . '_' . mt_rand(1000, 9999);
+    return $cartId;
 
 }
