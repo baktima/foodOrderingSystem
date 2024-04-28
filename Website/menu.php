@@ -217,7 +217,7 @@ WHERE customer.email = :email";
 <!-- this is really important, i change the folder into JSA cause if JS only, it detects
 the other JS file from other folder, i don't know how but just change the js folder name
 and change the source of the folder and should be working fine -->
-<script src="JSA/addToCarts.js"></script>
+<script src="JSA/addToCart.js"></script>
 
 </body>
 </html>
