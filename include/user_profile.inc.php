@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Input Validation
         if (empty($username) || empty($newemail)) { 
-            $errors["empty_input"] = "Fill in all required fields"; 
+            $errors["empty_input"] = "Please fill in both Username and E-mail; 
         }
         if (!filter_var($newemail, FILTER_VALIDATE_EMAIL)) {
             $errors["invalid_email"] = "Invalid email syntax";
@@ -37,14 +37,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         
        // Update user information only if there are no errors
-        if(update_user($pdo, $old_email, $username, $newemail, $pwd)) {
-          $_SESSION['user_email'] = $newemail; // Update session with new email
+       if(empty($pwd))
+       {
+        if(update_user_except_pass($pdo, $old_email, $username, $newemail)) {
+            $_SESSION['user_email'] = $newemail; // Update session with new email   
+        }
+
+       }else{
+            if(update_user($pdo, $old_email, $username, $newemail, $pwd)) {
+            $_SESSION['user_email'] = $newemail; // Update session with new email
+            }
         }
 
        
 
         // Redirect user after successful update
-        header("Location: {$_SERVER['PHP_SELF']}");
+        header("Location: ../Website/edit_user.php"); 
         exit();
 
     } catch (PDOException $e) {

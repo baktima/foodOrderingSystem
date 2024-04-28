@@ -35,3 +35,22 @@ function update_user(object $pdo, string $oldEmail, string $newUsername, string 
     return $stmt->execute(); 
 }
 
+function update_user_except_pass(object $pdo, string $oldEmail, string $newUsername, string $newEmail){ 
+    // Prepare the SQL query to update both customer_name and customer tables
+    $query = "UPDATE customer_name AS cn
+              INNER JOIN customer AS c ON cn.customer_ID = c.customer_ID
+              SET cn.name = :newUsername,
+                  c.email = :newEmail
+              WHERE c.email = :oldEmail";
+    
+    // Prepare the statement
+    $stmt = $pdo->prepare($query); 
+
+    // Bind parameters
+    $stmt->bindParam(":newUsername", $newUsername); 
+    $stmt->bindParam(":newEmail", $newEmail); 
+    $stmt->bindParam(":oldEmail", $oldEmail); 
+
+    // Execute the query
+    return $stmt->execute(); 
+}
