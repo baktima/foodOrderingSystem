@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Input Validation
         if (empty($username) || empty($newemail)) { 
-            $errors["empty_input"] = "Please fill in both Username and E-mail; 
+            $errors["empty_input"] = "Please fill in both Username and E-mail"; 
         }
         if (!filter_var($newemail, FILTER_VALIDATE_EMAIL)) {
             $errors["invalid_email"] = "Invalid email syntax";
