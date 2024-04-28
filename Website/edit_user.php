@@ -1,6 +1,7 @@
 <?php 
 require_once '../include/config_session.inc.php'; 
 require_once '../include/dbh.inc.php';
+require_once '../include/error_view.inc.php';
 ?>
 
 <?php
@@ -91,6 +92,12 @@ if ($email){
 	<div class="card">			
 		<div class="card-content">
 			<h1>User Profile</h1>
+			<?php
+				if (isset($_SESSION['error_user'])) {
+					displayErrors($_SESSION['error_user']);
+					unset($_SESSION['error_user']); // Clear the error session variable after displaying errors
+				}
+			?>
 			<form action='../include/user_profile.inc.php' method = "post">
 			<span>E-mail</span>
             <input type="text" name="email" value="<?php echo $email; ?>" placeholder="E-Mail">
