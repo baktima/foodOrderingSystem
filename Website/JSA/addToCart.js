@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Add event listeners to food buttons
+    updateTotalPayment()
     const foodButtons = document.querySelectorAll('.foodButtons');
     foodButtons.forEach(function (button) {
         button.addEventListener('click', function () {
@@ -117,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to update cart UI
     function updateCartUI(cartItems) {
+        updateTotalPayment();
         const cartContainer = document.querySelector('.cart_items');
         cartContainer.innerHTML = ''; // Clear existing cart items
         
@@ -179,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var cart_id = this.parentElement.parentElement.dataset.assignedCartId;
                 var foodId = this.parentElement.parentElement.querySelector('.foodID').dataset.assignedCartId;
                 updateQuantity(foodId, newQuantity, cart_id);
+                updateTotalPayment();
             });
         });
     
@@ -201,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         updateQuantity(foodId, newQuantity, cart_id); // Update quantity if not 0
                     }
                 }
+                updateTotalPayment();
             });
         });
     
@@ -242,7 +246,37 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(cart_id);
         
         }
-    }
+        function updateTotalPayment() {
+            var totalPayment = 0;
+            const cartItems = document.querySelectorAll('.cartItem');
+            cartItems.forEach(function (item) {
+                var price = parseFloat(item.querySelector('.cartPrice').textContent);
+                var quantity = parseInt(item.querySelector('.quantity').textContent);
+                totalPayment += price * quantity;
+            });
     
+            console.log(totalPayment);
+    
+            // Display the total payment in the UI
+            document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+        }
+        updateTotalPayment()
+        
+    }
+    function updateTotalPayment() {
+        var totalPayment = 0;
+        const cartItems = document.querySelectorAll('.cartItem');
+        cartItems.forEach(function (item) {
+            var price = parseFloat(item.querySelector('.cartPrice').textContent);
+            var quantity = parseInt(item.querySelector('.quantity').textContent);
+            totalPayment += price * quantity;
+        });
+
+        console.log(totalPayment);
+
+        // Display the total payment in the UI
+        document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+    }
+    updateTotalPayment()
 
 });

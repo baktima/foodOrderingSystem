@@ -11,13 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
             var currentQuantity = parseInt(quantityElement.textContent);
             var newQuantity = currentQuantity + 1;
             quantityElement.textContent = newQuantity;
-            
 
             // Send updated quantity to server using AJAX
             var cart_id = this.parentElement.parentElement.dataset.assignedCartId;
             var foodId = this.parentElement.parentElement.querySelector('.foodID').dataset.assignedCartId;
             updateQuantity(foodId, newQuantity, cart_id);
             
+            // Update total payment
+            updateTotalPayment();
         });
     });
 
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('decrease button clicked');
             var quantityElement = this.parentElement.querySelector('.quantity');
             var currentQuantity = parseInt(quantityElement.textContent);
-;            if (currentQuantity > 0) {
+            if (currentQuantity > 0) {
                 var newQuantity = currentQuantity - 1;
                 quantityElement.textContent = newQuantity;
 
@@ -39,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     updateQuantity(foodId, newQuantity, cart_id); // Update quantity if not 0
                 }
+                
+                // Update total payment
+                updateTotalPayment();
             }
         });
     });
@@ -80,5 +84,20 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send('cart_ID=' + encodeURIComponent(cart_id) + '&food_id=' + encodeURIComponent(foodId));
         console.log(cart_id);
     }
-});
 
+    // Function to update total payment
+    function updateTotalPayment() {
+        var totalPayment = 0;
+        const cartItems = document.querySelectorAll('.cartItem');
+        cartItems.forEach(function (item) {
+            var price = parseFloat(item.querySelector('.cartPrice').textContent);
+            var quantity = parseInt(item.querySelector('.quantity').textContent);
+            totalPayment += price * quantity;
+        });
+
+        console.log(totalPayment);
+
+        // Display the total payment in the UI
+        document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+    }
+});

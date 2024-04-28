@@ -170,7 +170,7 @@ WHERE customer.email = :email";
 					</div>
 					<h1>Total payment:</h1>
 					<div class="totalPay">
-						<h1><?php echo $total; ?></h1>
+						<h1 id="totalPayment"></h1>
 					</div>
 				</div>	
 			</div>
