@@ -43,9 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     var cartID = xhr.responseText;
                     var trimmedCartID = cartID.replace(/^"|"$/g, '');
+                    console.log("tete SAPI");
                     checkout(trimmedCartID, totalPayment);
-                    history(trimmedCartID);
-                    clearCart(trimmedCartID);
 
                 } else {
                     // Handle errors if any
@@ -79,9 +78,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // Function to checkout
     function checkout(cart_id, total_price) {
+        var totalPayment = updateTotalPayment();
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '../Website/PHP/checkout.php');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -93,20 +93,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
         const data = {
-            total_price: totals,
+            total_price: totalPayment,
             cart_Id: cart_id // You may need to adjust this if cart ID is required
         };
+        console.log(data);
         xhr.send(JSON.stringify(data));
+        //history(cart_id);
+        clearCart(cart_id);
     }
 // Function to history
 function history(cart_id) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../Website/PHP/history.php');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.open('POST', '../Website/PHP/newHistory.php');
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                console.log('History successfull');
+                console.log('History successful');
                 // Update UI or perform any necessary actions
             } else {
                 console.error('Error occurred:', xhr.statusText);
@@ -116,8 +119,11 @@ function history(cart_id) {
     const data = {
         cart_Id: cart_id // You may need to adjust this if cart ID is required
     };
+    console.log(data);
     xhr.send(JSON.stringify(data));
+    clearCart(cart_id);
 }
+
 
 
     // Function to add item to cart
@@ -302,6 +308,7 @@ function history(cart_id) {
         
                 // Display the total payment in the UI
                 document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+                return totalPayment;
             }
             updateTotalPayment()
             
@@ -319,6 +326,7 @@ function history(cart_id) {
     
             // Display the total payment in the UI
             document.getElementById('totalPayment').textContent = totalPayment.toFixed(2); // Assuming you have an element with id 'totalPayment'
+            return totalPayment; 
         }
         updateTotalPayment()
     
