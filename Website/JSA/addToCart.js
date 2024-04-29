@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(data);
         xhr.send(JSON.stringify(data));
         //history(cart_id);
-        clearCart(cart_id);
+        //clearCart(cart_id);
     }
 // Function to history
 function history(cart_id) {

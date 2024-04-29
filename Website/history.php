@@ -53,66 +53,78 @@ if(isset($_SESSION['user_email'])) {
 	</div>
 </header>
 	<div class="historyLog">
-		<!-- Start Copy-->
-			<div class="card">			
-				<div class="card-content">
+
+
+
+
+	<?php
+$query = "SELECT assigned_Cart_ID FROM customer WHERE email = :email";
+$statement = $pdo->prepare($query);
+$statement->bindParam(':email', $email);
+$statement->execute();
+$cart_ID = $statement->fetchColumn();
+
+$query = "SELECT * FROM checkout WHERE cart_ID = :cart_ID";
+$statement = $pdo->prepare($query);
+$statement->bindParam(':cart_ID', $cart_ID);
+$statement->execute();
+
+// Fetch all results as an associative array
+$checkouts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Loop through each food item and display it
+foreach($checkouts as $checkout) {
+	$length = strlen($checkout['check_out_id']) - 19; // Specify the number of characters to exclude from the end
+	$Checkoutname = substr($checkout['check_out_id'], 0, $length);
+	$Orderdate =substr(substr($checkout['check_out_id'], -19), 0, 10);
+
+    echo "
+		<div class='card'>
+		<div class='card-content'>
+				<div>
 					<div>
-						<div class="">
-							<h4>Checkout ID</h4>
-							<h5>XXXX-XXXX<h5>
-						</div>
-						<div>
-							<H4>Order Date</H4>
-							<h5>DD/MM/YYYY</h4>
-						</div>
+						<h4>Cart ID</h4>
+						<h5>$Checkoutname<h5>
 					</div>
-					
 					<div>
-						<!-- Start Copy-->
-						<div class="foodHist">
-							<h4>Food Name</h4>
-							<h4>x1</h4>
-						</div>
-						<!-- End Copy-->
-						<!-- Start Copy-->
-						<div class="foodHist">
-							<h4>Food Name</h4>
-							<h4>x1</h4>
-						</div>
-						<!-- End Copy-->
-						<!-- Start Copy-->
-						<div class="foodHist">
-							<h4>Food Name</h4>
-							<h4>x1</h4>
-						</div>
-						<!-- End Copy-->
-						<!-- Start Copy-->
-						<div class="foodHist">
-							<h4>Food Name</h4>
-							<h4>x1</h4>
-						</div>
-						<!-- End Copy-->
-						<!-- Start Copy-->
-						<div class="foodHist">
-							<h4>Food Name</h4>
-							<h4>x1</h4>
-						</div>
-						<!-- End Copy-->
+						<H4>Order Date</H4>
+						<h5>$Orderdate</h4>
 					</div>
-					
-					<div>
+				</div>
+				<div>";
+					$query = "SELECT * FROM history WHERE checkOutId = :checkout";
+					$statement = $pdo->prepare($query);
+					$statement->bindParam(':checkout', $checkout['check_out_id']);
+					$statement->execute();
+
+					// Fetch all results as an associative array
+					$histories = $statement->fetchAll(PDO::FETCH_ASSOC);
+					foreach($histories as $history) {
+						$food_id = $history['food_id'];
+						$query = "SELECT * FROM food WHERE food_id = :food_id";
+						$statement = $pdo->prepare($query);
+						$statement->bindParam(':food_id', $food_id);
+						$statement->execute();
+						$food = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+						echo "<div class='foodHist'>
+							<h4>{$food['name']}</h4>
+							<h4>{$history['quantity']}</h4>
+						</div>";
+					}
+				echo "</div>
+				<div>
 					<H4>Total Price</H4>
-					<h5>$$$</h5>
-					</div>
-				</div>	
+					<h5>{$checkout['total_price']}</h5>
+				</div>
 			</div>
-		<!-- End Copy-->
-		<!-- Start Copy-->
-			<div class="card">			
-				<div class="card-content">
-				</div>	
-			</div>
-		<!-- End Copy-->
+		</div>
+	";
+}
+?>
+
 	</div>
 	<footer>
 		<div class="line">
@@ -130,7 +142,7 @@ if(isset($_SESSION['user_email'])) {
 					<li><a href="#">Company Sdn Bhd</a></li>
 					<li><a href="#">COPYRIGHT 2024 © COMPANY</a></li>
 					<li><a href="#">Company Registration No: 202403310001 (XTA12932-Z)</a></li>
-					
+
 				</ul>
 			</div>	
 			<div class="foot-right">

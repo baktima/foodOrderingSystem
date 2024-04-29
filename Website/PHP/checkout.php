@@ -32,8 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':cart_ID', $cart_id);
             $stmt->bindParam(':total_price', $total_price);
             $stmt->bindParam(':payment_id', $payment_id);
-
-            if ($stmt->execute()) {
+            $stmt->execute();
                 // Item inserted successfully
 
                     // Fetch cart records
@@ -57,13 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $insertStmt->bindParam(':currentDateTime', $currentDateTime);
                         $insertStmt->bindParam(':check_out_id', $check_out_id);
                         $insertStmt->execute();
+
+                $query = "DELETE FROM cart WHERE cart_id = :cart_id";
+                // Prepare and execute the statement
+                $stmt = $pdo->prepare($query);
+                $stmt->bindParam(':cart_id', $cart_id);
+                $stmt->execute();
                 }
 
                 echo "Checkout Updated";
-            } else {
-                // Error occurred while inserting item
-                echo "Error occurred while updating checkout";
-            }
+
         } catch (PDOException $e) {
             // Handle database errors
             echo "Database error: " . $e->getMessage();
@@ -74,6 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // Invalid request method
-    echo "Invalid request method";
+    echo "Invalid request method";
 }
 ?>

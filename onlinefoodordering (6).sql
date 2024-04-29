@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 04:29 AM
+-- Generation Time: Apr 29, 2024 at 11:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,18 +52,9 @@ CREATE TABLE `checkout` (
 --
 
 INSERT INTO `checkout` (`check_out_id`, `cart_ID`, `total_price`, `payment_id`) VALUES
-('CART_660f537c8fc39_4587_2024-04-28_20:17:29', 'CART_660f537c8fc39_4587', 15.8, '1'),
-('CART_660f537c8fc39_4587_2024-04-28_20:18:47', 'CART_660f537c8fc39_4587', 15.8, '1'),
-('CART_660f537c8fc39_4587_2024-04-28_20:19:22', 'CART_660f537c8fc39_4587', 0, '1'),
-('CART_660f537c8fc39_4587_2024-04-28_20:19:40', 'CART_660f537c8fc39_4587', 15.8, '1'),
-('CART_660f537c8fc39_4587_2024-04-28_20:21:32', 'CART_660f537c8fc39_4587', 30.4, '1'),
-('CART_660f537c8fc39_4587_2024-04-28_20:22:42', 'CART_660f537c8fc39_4587', 15.8, '1'),
-('CART_660f537c8fc39_4587_2024-04-28_20:22:54', 'CART_660f537c8fc39_4587', 7.9, '1'),
-('CART_660f537c8fc39_4587_2024-04-29_04:22:31', 'CART_660f537c8fc39_4587', 60.8, '1'),
-('CART_660f537c8fc39_4587_2024-04-29_04:22:39', 'CART_660f537c8fc39_4587', 68.7, '1'),
-('CART_660f537c8fc39_4587_2024-04-29_04:22:42', 'CART_660f537c8fc39_4587', 12.4, '1'),
-('CART_660f537c8fc39_4587_2024-04-29_04:22:44', 'CART_660f537c8fc39_4587', 12.4, '1'),
-('CART_660f537c8fc39_4587_2024-04-29_04:23:29', 'CART_660f537c8fc39_4587', 73.2, '1');
+('CART662f077969589_4068_2024-04-29_08:33:46', 'CART662f077969589_4068', 36.6, '1'),
+('CART662f077969589_4068_2024-04-29_08:49:00', 'CART662f077969589_4068', 42.8, '1'),
+('CART662f077969589_4068_2024-04-29_08:50:31', 'CART662f077969589_4068', 66.7, '1');
 
 -- --------------------------------------------------------
 
@@ -86,6 +77,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`email`, `passkey`, `address`, `phoneNumber`, `customer_ID`, `assigned_Cart_ID`) VALUES
 ('jepther8@gmal.com', '$2y$12$zxiKYJ1mPtdJpr32gvA/n.j1I/E7XP19WfR4J8rv1G8z7KxHOUIZG', NULL, NULL, '', ''),
+('jephtha909@gmail.com', '$2y$12$us8aDVbodgt77MODpMiAOepwCca5vIFhXHOkGWAMoVMJclL.00bfO', NULL, NULL, 'CUSTOMER662f07796947d8358', 'CART662f077969589_4068'),
 ('jepther1@gmail.com', '$2y$12$TVaRCc.4Y3B0YlEHtXd8IOlOzLVY5Az3U1GValrtvqonxMJLvFAVW', NULL, NULL, 'CUSTOMER_66097864d8d1d_9506', 'CART_66097864d8e89_5105'),
 ('jepther2@gmail.com', '$2y$12$GaUw41gr7ORzWP4QQ6iUQORRNCHtogLUgfiZORIA1w4K.GY4Fls2S', NULL, NULL, 'CUSTOMER_660f537c8f89c_4771', 'CART_660f537c8fc39_4587'),
 ('jepther3@gmail.com', '$2y$12$0QD5661oSc.svHQFmWgm9ugoXjCj7IRRvV4PBZ5W4auT6gsqhD0KK', NULL, NULL, 'CUSTOMER_660f55fb8ab18_4171', 'CART_660f55fb8ae42_5338'),
@@ -108,6 +100,7 @@ CREATE TABLE `customer_name` (
 --
 
 INSERT INTO `customer_name` (`customer_ID`, `name`) VALUES
+('CUSTOMER662f07796947d8358', 'Celiba'),
 ('CUSTOMER_662a7de2f4182_8642', 'tete1');
 
 -- --------------------------------------------------------
@@ -196,15 +189,15 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`num`, `food_id`, `quantity`, `checkOutId`, `dateColumn`) VALUES
-(13, 'AR02', 1, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 02:22:54'),
-(14, 'BV01', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:22:42'),
-(15, 'BV01', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:22:42'),
-(16, 'BV01', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:23:29'),
-(17, 'BV01', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:23:29'),
-(18, 'AR02', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:23:29'),
-(19, 'AR02', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:23:29'),
-(20, 'AR01', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:23:29'),
-(21, 'AR01', 2, 'CART_660f537c8fc39_4587_2024-04-28_20:17:29', '2024-04-29 04:23:29');
+(27, 'AR01', 1, 'CART662f077969589_4068_2024-04-29_08:33:46', '2024-04-29 08:33:46'),
+(28, 'AR02', 1, 'CART662f077969589_4068_2024-04-29_08:33:46', '2024-04-29 08:33:46'),
+(29, 'BV01', 1, 'CART662f077969589_4068_2024-04-29_08:33:46', '2024-04-29 08:33:46'),
+(30, 'AR01', 1, 'CART662f077969589_4068_2024-04-29_08:49:00', '2024-04-29 08:49:00'),
+(31, 'AR02', 1, 'CART662f077969589_4068_2024-04-29_08:49:00', '2024-04-29 08:49:00'),
+(32, 'BV01', 2, 'CART662f077969589_4068_2024-04-29_08:49:00', '2024-04-29 08:49:00'),
+(33, 'BV01', 1, 'CART662f077969589_4068_2024-04-29_08:50:31', '2024-04-29 08:50:31'),
+(34, 'CH01', 1, 'CART662f077969589_4068_2024-04-29_08:50:31', '2024-04-29 08:50:31'),
+(35, 'BV03', 1, 'CART662f077969589_4068_2024-04-29_08:50:31', '2024-04-29 08:50:31');
 
 -- --------------------------------------------------------
 
@@ -233,7 +226,8 @@ INSERT INTO `paymentmethod` (`payment_id`, `payment_type`) VALUES
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`number`),
-  ADD KEY `fk_cart_food` (`food_id`);
+  ADD KEY `fk_cart_food` (`food_id`),
+  ADD KEY `fk_cart_customer` (`cart_id`);
 
 --
 -- Indexes for table `checkout`
@@ -291,13 +285,13 @@ ALTER TABLE `paymentmethod`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `number` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `number` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
